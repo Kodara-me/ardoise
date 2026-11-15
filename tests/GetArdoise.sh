@@ -14,6 +14,7 @@ check() {
         printf 'PASS: %s\n' "$2"
     else
         printf 'FAIL: %s\n' "$2"
+        [ -f "$root/output" ] && sed 's/^/    /' "$root/output"
         failures=$((failures + 1))
     fi
 }
