@@ -109,7 +109,7 @@ if [ "$installed" = "$version" ]; then
     exit 0
 fi
 
-say "Downloading $archive…"
+say "Downloading ${archive}…"
 curl -fsSL -o "$work/$archive" "$base/$archive" || fail "cannot download $base/$archive"
 expected=$(sed -n "s/^\([0-9a-f]\{64\}\)  $archive\$/\1/p" "$work/SHA256SUMS")
 [ "$(sha256 "$work/$archive")" = "$expected" ] \
@@ -129,7 +129,7 @@ if [ -n "$qt" ]; then
     set -- "$@" "-DCMAKE_PREFIX_PATH=$qt"
 fi
 
-say "Building Ardoise $version…"
+say "Building Ardoise ${version}…"
 run cmake "$@" || fail "CMake could not configure Ardoise; check that Qt 6.2+ is installed, or pass --qt"
 run cmake --build "$work/build" --parallel || fail "Ardoise did not build"
 if [ "$dry_run" -eq 0 ] && ! mkdir -p "$prefix" 2>/dev/null; then
