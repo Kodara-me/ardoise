@@ -39,6 +39,21 @@ Install Visual Studio Build Tools with the C++ workload and a matching Qt 6 desk
 kit. Run Ninja commands from a developer shell for the selected compiler. Install
 CMake and Ninja if they are not available in that shell.
 
+`scripts/setup-windows.ps1` installs these prerequisites into one folder of your choice
+(asked for when `-Root` is omitted), with the Qt version the CI uses, and writes a
+script there that opens an MSVC developer shell with CMake, Ninja and Qt on `PATH`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\setup-windows.ps1 -Root D:\deps
+. D:\deps\ardoise-env.ps1
+```
+
+It reuses an existing Visual Studio installation that has the MSVC x64 tools, and
+otherwise installs Visual Studio Build Tools under the same folder; the Visual Studio
+Installer and the Windows SDK still go to the system drive. Qt is downloaded with
+aqtinstall, run through a uv-managed Python kept in that folder. `-DryRun` prints the
+plan without installing anything.
+
 Match the Qt kit to the compiler and architecture: use an MSVC Qt kit with MSVC or
 a MinGW Qt kit with its matching MinGW compiler. Make the Qt kit's `bin` directory
 available on `PATH` when running programs that require its runtime DLLs.
