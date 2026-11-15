@@ -27,7 +27,7 @@ jobs:
           - name: Linux, Qt 6.4
             os: ubuntu-24.04
           - name: macOS, Qt 6.8
-            os: macos-14
+            os: macos-15
             qt: '6.8.3'
           - name: Windows, Qt 6.8
             os: windows-2022
